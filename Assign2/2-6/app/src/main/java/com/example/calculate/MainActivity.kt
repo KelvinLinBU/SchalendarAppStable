@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sqrt: Button
     private lateinit var equal: Button
     private lateinit var sign: Button
+    private lateinit var clear: Button
     private lateinit var textView: TextView
     private var tex: String = ""
     private var store: String = ""
@@ -52,8 +53,14 @@ class MainActivity : AppCompatActivity() {
         time = findViewById(R.id.time)
         divide = findViewById(R.id.divide)
         sign = findViewById(R.id.sign)
+        clear = findViewById(R.id.clear)
         textView = findViewById(R.id.text)
 
+        clear.setOnClickListener { view: View ->
+            tex = ""
+            store = ""
+            textView.text = "0.0"
+        }
         add.setOnClickListener { view: View ->
             tex += "+"
             store += "+"
@@ -143,6 +150,13 @@ class MainActivity : AppCompatActivity() {
             var a: MutableList<Any> = mutableListOf()
             var p:Int =0
             var text=""
+            if (tex[0]== '+'||tex[0]== '*'||tex[0]== '/'||tex[0]== 's'){
+                a.add(""+ tex[p])
+            }
+            else{
+                text+=tex[0]
+            }
+            p+=1
             while(tex.length != p){
                 if (tex[p]=='+'||tex[p]=='-'||tex[p]=='*'||tex[p]=='/'||tex[p]=='s'){
                     if (text != ""){a.add(text.toFloat())}
@@ -160,7 +174,7 @@ class MainActivity : AppCompatActivity() {
             }
             return a
         }
-        fun culate(a:MutableList<Any>): Float{
+        fun culate(a:MutableList<Any>): String{
             while(a.indexOfFirst{it == "s"}!= -1){
                 var p = a.indexOfFirst{it == "s"}
                 a[p-1] = sqrt(a[p-1] as Float)
@@ -190,7 +204,7 @@ class MainActivity : AppCompatActivity() {
                 a.removeAt(p+1)
                 a.removeAt(p)
             }
-            return a[0] as Float
+            return a[0].toString()
         }
 
         fun rpeat(a:MutableList<Any>):Boolean{
@@ -222,7 +236,7 @@ class MainActivity : AppCompatActivity() {
 
         equal.setOnClickListener { view: View ->
             var a = cal(store)
-            if (a[0] =="+"||a[0] =="-"||a[0] =="*"||a[0] =="/"||a[0] =="s"){
+            if (a[0] =="+"||a[0] =="*"||a[0] =="/"||a[0] =="s"){
                 store = ""
                 tex = ""
                 textView.text = "error:wrong symbol position"
@@ -242,7 +256,8 @@ class MainActivity : AppCompatActivity() {
                 textView.text = "error:cannot divide 0"
             }else{
                 var c= culate(a)
-                tex = c.toString()
+                tex = c
+                store = c
                 textView.text = "$c"
             }
         }
