@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="40dp"
+    tools:context=".MainActivity">
+
+
+
+    <SeekBar
+        android:id="@+id/sBcel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:min="0"
+        android:max="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/cel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Celsius"
+        android:gravity="left"
+        app:layout_constraintBottom_toTopOf="@+id/sBcel"/>
+
+    <TextView
+        android:id="@+id/celnum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0°C"
+        android:gravity="right"
+        android:textColor="@color/Blue"
+        app:layout_constraintTop_toBottomOf="@+id/sBcel"/>
+
+    <TextView
+        android:id="@+id/fah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fahrenheit"
+        android:gravity="left"
+        app:layout_constraintTop_toBottomOf="@+id/celnum"/>
+    <SeekBar
+        android:id="@+id/sBfah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:min="0"
+        android:max="212"
+        app:layout_constraintTop_toBottomOf="@+id/fah"/>
+
+    <TextView
+        android:id="@+id/fahnum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="32°F"
+        android:gravity="right"
+        android:textColor="@color/Blue"
+        app:layout_constraintTop_toBottomOf="@+id/sBfah"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
