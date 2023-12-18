@@ -20,6 +20,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -55,6 +56,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dbtest.course.AddCourse
 import com.example.dbtest.course.CourseApp
 import com.example.dbtest.course.CoursePage
+import com.example.dbtest.database.Building
 import com.example.dbtest.database.Task
 import com.example.dbtest.database.TaskRepository
 import com.example.dbtest.task.Addtask
@@ -69,6 +71,7 @@ class MainActivity : ComponentActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var buildingNum = taskViewModel.allBuildings()
         setContent {
             BasicsCodelabTheme{
                 MyScreen(this,taskViewModel)
@@ -77,6 +80,89 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+fun initBuilding(taskViewModel: TaskViewModel){
+    var b0 = Building("AAS","138 Mountfort Street")
+    var b1 = Building("AGG","925 Commonwealth Avenue")
+    var b2 = Building("ASC","300 Babcock Street")
+    var b3 = Building("BRB","5 Cummington Mall")
+    var b4 = Building("BSC","2 Cummington Mall")
+    var b5 = Building("CAS","685 Commonwealth Avenue")
+    var b6 = Building("CDS","665 Commonwealth Avenue")
+    var b7 = Building("CFA","855 Commonwealth Avenue")
+    var b8 = Building("CGS","871 Commonwealth Avenue")
+    var b9 = Building("CLN","900 Commonwealth Avenue")
+    var b10 = Building("CNS","677 Beacon Street")
+    var b11 = Building("COM","640 Commonwealth Avenue")
+    var b12 = Building("CRW","619 Memorial Dr, Cambridge, MA 02139")
+    var b13 = Building("CSE","285 Babcock Street")
+    var b14 = Building("EGL","236 Bay State Road")
+    var b15 = Building("EIB","143 Bay State Road")
+    var b16 = Building("EIL","285 Babcock Street")
+    var b17 = Building("EMA","730 Commonwealth Ave, Boston, MA 02215")
+    var b18 = Building("EMB","15 St. Mary’s Street")
+    var b19 = Building("ENG","112 Cummington Mall")
+    var b20 = Building("EOP","890 Commonwealth Avenue")
+    var b21 = Building("EPC","750 Commonwealth Avenue, Boston, MA 02215")
+    var b22 = Building("ERA","48 Cummington Mall")
+    var b23 = Building("ERB","44 Cummington Mall")
+    var b24 = Building("FAB","180 Riverway, Boston, MA 02215")
+    var b25 = Building("FCB","25 Pilgrim Road")
+    var b26 = Building("FCC","150 Riverway")
+    var b27 = Building("FLR","808 Commonwealth Avenue")
+    var b28 = Building("FOB","704 Commonwealth Avenue")
+    var b29 = Building("FRC","915 Commonwealth Avenue")
+    var b30 = Building("GDP","53 Bay State Road")
+    var b31 = Building("GMS","72 East Concord Street")
+    var b32 = Building("GRS","705 Commonwealth Avenue")
+    var b33 = Building("GSU","775 Commonwealth Avenue, Boston, MA 02215")
+    var b34 = Building("HAR","595 Commonwealth Avenue")
+    var b35 = Building("HAW","43 Hawes Street, Brookline")
+    var b36 = Building("HIS","226 Bay State Road")
+    var b37 = Building("IEC","888 Commonwealth Avenue")
+    var b38 = Building("IRB","154 Bay State Road")
+    var b39 = Building("","")
+    var b40 = Building("","")
+    var b41 = Building("","")
+    var b42 = Building("","")
+    var b43 = Building("","")
+    var b44 = Building("","")
+    var b45 = Building("","")
+    var b46 = Building("","")
+    var b47 = Building("","")
+    var b48 = Building("","")
+    var b49 = Building("","")
+    var b50 = Building("","")
+    var b51 = Building("","")
+    var b52 = Building("","")
+    var b53 = Building("","")
+    var b54 = Building("","")
+    var b55 = Building("","")
+    var b56 = Building("","")
+    var b57 = Building("","")
+    var b58 = Building("","")
+    var b59 = Building("","")
+    var b60 = Building("","")
+    var b61 = Building("","")
+    var b62 = Building("","")
+    var b63 = Building("","")
+    var b64 = Building("","")
+    var b65 = Building("","")
+    var b66 = Building("","")
+    var b67 = Building("","")
+    var b68 = Building("","")
+    var b69 = Building("","")
+    var b70 = Building("","")
+    var b71 = Building("","")
+    var b72 = Building("","")
+    var b73 = Building("","")
+    var b74 = Building("","")
+    var b75 = Building("","")
+    var b76 = Building("","")
+    var b77 = Building("","")
+    var b78 = Building("","")
+
 }
 // bar set
 @Composable
@@ -103,13 +189,13 @@ private fun BottomNavigation(selectedPage: String, onNavigation: (String) -> Uni
         NavigationBarItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Add,
+                    imageVector = Icons.Default.DateRange,
                     contentDescription = null
                 )
             },
             label = {
                 Text(
-                    text = stringResource(R.string.bottom_navigation_add)
+                    text = stringResource(R.string.bottom_navigation_task)
                 )
             },
             selected = selectedPage == "task",

@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -19,6 +20,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -54,46 +57,46 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.util.Calendar
 import java.util.Date
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun SingleSelectCheckBox(
-    options: List<String>,
-    selectedOption: String?,
-    onOptionSelected: (String) -> Unit
-) {
-    FlowRow(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-    ) {
-        options.forEach { option ->
-            Row(modifier = Modifier.padding(3.dp), verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(
-                    checked = option == selectedOption,
-                    onCheckedChange = { checked ->
-                        if (checked) {
-                            onOptionSelected(option)
-                        }
-                    }
-                )
-                Text(text = option)
+fun DropdownMenuSample(options:List<String>, selectedOption: MutableState<String>) {
+    Box(modifier = Modifier){
+        var expanded by remember { mutableStateOf(false) }
+        Button(onClick = { expanded = true }) {
+            Text(selectedOption.value)
+        }
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false } // 点击外部时关闭菜单
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(
+                    {Text(text = option)},
+                    onClick = {
+                        selectedOption.value = option
+                        expanded = false
+                    })
             }
         }
+        
     }
 }
+
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun MultiSelectCheckBox(options:List<String>,checkedState: SnapshotStateMap<String, Boolean>) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(1.dp),
     ) {
-        Text("Select Frequency")
+        Text("Select Frequency:")
 
-        FlowRow {
+        FlowRow(
+            modifier = Modifier.padding(1.dp)
+        ) {
             options.forEach { option ->
-                Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                Row(modifier = Modifier.padding(1.dp), verticalAlignment = Alignment.CenterVertically) {
                     Checkbox(
                         checked = checkedState[option] ?: false,
                         onCheckedChange = { checked ->
@@ -115,16 +118,17 @@ fun AddCourse(
     onCourseChange: () -> Unit
 ) {
     var title by remember { mutableStateOf("")}
+    var type = remember { mutableStateOf(context.getString(R.string.Lecture)) }
+    var code by remember { mutableStateOf("") }
+    var room by remember { mutableStateOf("") }
+    var start = remember { mutableStateOf("") }
     val options0 = listOf(
-        stringResource(id = R.string.Course),
+        stringResource(id = R.string.Lecture),
+        stringResource(id = R.string.Independent),
         stringResource(id = R.string.Lab),
         stringResource(id = R.string.Dis),
         stringResource(id = R.string.Meeting)
     )
-    var type by remember { mutableStateOf<String?>(null) }
-    var code by remember { mutableStateOf("") }
-    var room by remember { mutableStateOf("") }
-    var start = remember { mutableStateOf("") }
     val options = listOf(
         stringResource(id = R.string.Monday),
         stringResource(id = R.string.Tuesday),
@@ -136,12 +140,14 @@ fun AddCourse(
         options.forEach { this[it] = false }
     }}
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(bottom = 80.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         MyTextInput("Title", title) { title = it }
-        SingleSelectCheckBox(options0,type){type = it}
+        DropdownMenuSample(options0,type)
         MyTextInput("Code", code) { code = it }
         MyTextInput("Room", room) { room = it }
         showTimePicker(context, start,stringResource(id = R.string.course_select_start))
@@ -149,7 +155,7 @@ fun AddCourse(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(1.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ){
             Button(
@@ -158,7 +164,7 @@ fun AddCourse(
                     if (title ==""){
                         val warn = context.getString(R.string.task_noTitle)
                         Toast.makeText(context,warn,Toast.LENGTH_SHORT).show()}
-                    else if( type == null){
+                    else if( type.value == null){
                         val warn = context.getString(R.string.course_noType)
                         Toast.makeText(context,warn,Toast.LENGTH_SHORT).show()}
                     else if(start.value ==""){
@@ -174,7 +180,7 @@ fun AddCourse(
                         if(mon == false && tue == false && wed == false && thu == false && fri == false  ){
 
                         }else{
-                            addCourse(context, taskViewModel, title, type!!,code,room,start.value,mon!!,tue!!,wed!!,thu!!,fri!!)
+                            addCourse(context, taskViewModel, title, type.value,code,room,start.value,mon!!,tue!!,wed!!,thu!!,fri!!)
                             val text = context.getString(R.string.task_add) + " " + title
                             Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
                         }

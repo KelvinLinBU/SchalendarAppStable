@@ -54,7 +54,7 @@ fun showTimePicker(context: Context, time: MutableState<String>,s:String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(3.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -84,7 +84,7 @@ fun showDatePicker(context: Context,date:MutableState<String>){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(1.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -111,7 +111,7 @@ fun MyTextInput(name:String,text:String,onTextChange: (String) -> Unit) {
         label = { Text("$enter $name") },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(1.dp),
     )
 }
 

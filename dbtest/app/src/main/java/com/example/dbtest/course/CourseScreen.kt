@@ -312,12 +312,12 @@ fun CourseNoAdd(context: Context,taskViewModel:TaskViewModel,modifier: Modifier)
 fun CourseApp(context: Context,taskViewModel: TaskViewModel, modifier: Modifier = Modifier,onAddChange:()->Unit) {
     BasicsCodelabTheme {
         Box(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.fillMaxSize()
         ) {
             CourseNoAdd(context,taskViewModel,modifier)
             FloatingActionButton(
                 onClick = onAddChange,
-                modifier = Modifier.align(Alignment.BottomEnd)
+                modifier = Modifier.align(Alignment.BottomEnd).padding(bottom = 90.dp, end = 10.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,

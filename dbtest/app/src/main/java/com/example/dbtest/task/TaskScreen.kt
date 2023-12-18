@@ -205,13 +205,13 @@ private fun TasksList(
 fun TaskApp(taskViewModel: TaskViewModel, modifier: Modifier = Modifier,onAddChange:()->Unit) {
     BasicsCodelabTheme {
         Box(
-            modifier = Modifier.padding(16.dp) // 添加内边距
+            modifier = Modifier.fillMaxSize()
         ) {
             var tasks = taskViewModel.allTasks.collectAsState(initial = emptyList()).value
             TasksList(modifier, taskViewModel, tasks)
             FloatingActionButton(
                 onClick = onAddChange,
-                modifier = Modifier.align(Alignment.BottomEnd)
+                modifier = Modifier.align(Alignment.BottomEnd).padding(bottom = 90.dp,end =10.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,

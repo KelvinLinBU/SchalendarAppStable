@@ -3,7 +3,7 @@
     <string name="show_less">Show less</string>
     <string name="show_more">Show more</string>
     <string name="bottom_navigation_home">Courses</string>
-    <string name="bottom_navigation_add">Add</string>
+    <string name="bottom_navigation_task">Tasks</string>
     <string name="bottom_navigation_profile">Profile</string>
     // Task screen
     <string name="task_noTask">No Task!</string>
@@ -37,7 +37,8 @@
     <string name="Friday_full">Friday</string>
     <string name="Lab">Lab</string>
     <string name="Dis">Discussion</string>
-    <string name="Course">Course</string>
+    <string name="Lecture">Lecture</string>
+    <string name="Independent">Independent</string>
     <string name="Meeting">Meeting</string>
     <string name="course_select_start">Select start time:</string>
     <string name="course_add_back">Back to courses list </string>

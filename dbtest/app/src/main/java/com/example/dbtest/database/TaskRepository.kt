@@ -11,8 +11,10 @@ class TaskRepository(private val taskDao: TaskDao,private val courseDao: CourseD
     val allWCourse: Flow<List<Course>> = courseDao.getCourseW()
     val allThCourse: Flow<List<Course>> = courseDao.getCourseTh()
     val allFCourse: Flow<List<Course>> = courseDao.getCourseF()
+
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
+    suspend fun allBuildings() = buildingDao.getBuildings()
     suspend fun addTask(task: Task) = taskDao.addTask(task)
     suspend fun delTask(task: Task) = taskDao.delTask(task)
     suspend fun addCourse(course: Course) = courseDao.addCourse(course)
