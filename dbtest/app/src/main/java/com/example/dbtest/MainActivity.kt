@@ -1,5 +1,6 @@
 package com.example.dbtest
 
+import ProfilePage
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -229,6 +230,7 @@ fun MyScreen(context: Context,taskViewModel: TaskViewModel) {
         when (currentPage) {
             "course" -> CoursePage(context,taskViewModel, modifier=Modifier)
             "task" -> TaskPage(context,taskViewModel, modifier=Modifier)
+            "profile" -> ProfilePage(context, taskViewModel, modifier=Modifier)
             else -> CoursePage(context,taskViewModel, modifier=Modifier)
         }
     }
