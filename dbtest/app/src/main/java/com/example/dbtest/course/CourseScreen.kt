@@ -1,7 +1,12 @@
 package com.example.dbtest.course
-
+import org.json.JSONObject
 import android.R.attr.onClick
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -61,6 +66,9 @@ import com.example.dbtest.task.Addtask
 import com.example.dbtest.task.EmptyTasksImage
 import com.example.dbtest.task.TaskApp
 import com.example.dbtest.ui.theme.BasicsCodelabTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.net.URL
 import java.time.LocalDate
 
 
@@ -281,13 +289,41 @@ fun TopBar(context:Context,taskViewModel:TaskViewModel, week:String,left:()->Uni
 
     }
 }
+
+fun kelvinToCelsius(kelvin: Double): Double {
+    return kelvin - 273.15
+}
+fun kelvinToFahrenheit(kelvin: Double): Double {
+    return kelvin * 9/5 - 459.67
+}
+
 @Composable
-fun CourseNoAdd(context: Context,taskViewModel:TaskViewModel,modifier: Modifier){
+fun CourseNoAdd(context: Context, taskViewModel: TaskViewModel, modifier: Modifier) {
     var shouldShowWeather by rememberSaveable { mutableStateOf(false) }
-    Surface(modifier, color = MaterialTheme.colorScheme.background) {
+    var weatherData by remember { mutableStateOf("") } // Holds weather data
+
+    LaunchedEffect(shouldShowWeather) {
         if (shouldShowWeather) {
-            // Weather Api
-        } else {
+            val weatherInfo = fetchWeatherData()
+            weatherInfo?.let { (temperature, windSpeed, weatherDescription) ->
+                val fahrenheitTemperature = kelvinToFahrenheit(temperature)
+                val messagetemp = "Temp: $fahrenheitTemperature °F"
+                val celsiusTemperature = kelvinToCelsius(temperature)
+                val celsiusmessagetemp = "Temp: $celsiusTemperature °C"
+                val roundedFahrenheitTemp = String.format("%.2f", fahrenheitTemperature)
+                val roundedCelsiusTemp = String.format("%.2f", celsiusTemperature)
+                val windspeed = "Wind: $windSpeed"
+                val weatherdescription = "$weatherDescription"
+                showToast(context, roundedFahrenheitTemp)
+                showToast(context, windspeed)
+                showToast(context, weatherdescription)
+                showToast(context, getTemperatureRecommendation(celsiusTemperature))
+            }
+        }
+    }
+
+
+    Surface(modifier, color = MaterialTheme.colorScheme.background) {
             var today = LocalDate.now().dayOfWeek.toString()
             var value = 1000
             if(today=="TUESDAY"){ value += 1
@@ -305,8 +341,50 @@ fun CourseNoAdd(context: Context,taskViewModel:TaskViewModel,modifier: Modifier)
             TopBar(context, taskViewModel, day, left = { whichday -= 1 },right = { whichday += 1 },wea= {shouldShowWeather=true})
         }
     }
+
+fun getTemperatureRecommendation(temperature: Double): String {
+    return when {
+        temperature < 0 -> "It's very cold! Bundle up!"
+        temperature in 0.0..10.0 -> "It's quite chilly. Wear a coat!"
+        temperature in 10.0..20.0 -> "It's cool. A jacket might be good."
+        temperature in 20.0..30.0 -> "It's pleasant. Enjoy the weather!"
+        temperature in 30.0..35.0 -> "It's warm. T-shirt weather!"
+        temperature > 35.0 -> "It's hot! Find shade!"
+        else -> "Temperature information unavailable."
+    }
+}
+suspend fun fetchWeatherData(): Triple<Double, Double, String>? {
+    // Replace 'YOUR_API_KEY' with your actual API key
+    val apiKey = "f59dbd3ae07ebb65b3538ca10a8c2cb7"
+    val city = "New York" // Replace with the desired city
+    val url = "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey"
+
+    return try {
+        val response = withContext(Dispatchers.IO) {
+            val jsonResponse = URL(url).readText()
+            JSONObject(jsonResponse)
+        }
+
+        // Extract temperature, wind speed, and weather description
+        val main = response.getJSONObject("main")
+        val temperature = main.getDouble("temp")
+
+        val wind = response.getJSONObject("wind")
+        val windSpeed = wind.getDouble("speed")
+
+        val weatherArray = response.getJSONArray("weather")
+        val weatherObject = weatherArray.getJSONObject(0)
+        val weatherDescription = weatherObject.getString("description")
+
+        Triple(temperature, windSpeed, weatherDescription)
+    } catch (e: Exception) {
+        null // Handle error or return null for simplicity
+    }
 }
 
+fun showToast(context: Context, message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+}
 
 @Composable
 fun CourseApp(context: Context,taskViewModel: TaskViewModel, modifier: Modifier = Modifier,onAddChange:()->Unit) {
