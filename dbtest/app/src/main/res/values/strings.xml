@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">dbtest</string>
+    <string name="show_less">Show less</string>
+    <string name="show_more">Show more</string>
+    <string name="bottom_navigation_home">Courses</string>
+    <string name="bottom_navigation_add">Add</string>
+    <string name="bottom_navigation_profile">Profile</string>
+    // Task screen
+    <string name="task_noTask">No Task!</string>
+    <string name="task_due">Due:  </string>
+    <string name="task_noDetail">No details </string>
+    <string name="task_add_mention">Added in to your tasks: </string>
+    <string name="task_add">Add </string>
+    <string name="task_enter">Enter</string>
+    <string name="task_select_date">Select date:</string>
+    <string name="task_select_due">Select due time:</string>
+    <string name="task_noTitle">You must write a title!</string>
+    <string name="task_noDate">You must pick a date!</string>
+    <string name="task_noDue">You must pick a due time!</string>
+    <string name="task_open_picker">Open Picker</string>
+    <string name="task_add_back">Back to tasks list </string>
+    <string name="task_del">Finished </string>
+    // Course screen
+    <string name="course_outschool">Out Campus </string>
+    <string name="course_del"> Delete </string>
+    <string name="course_dir"> Get Direction </string>
+    <string name="course_noCourse">No Courses!</string>
+    <string name="Monday">Mon</string>
+    <string name="Tuesday">Tue</string>
+    <string name="Wednesday">Wed</string>
+    <string name="Thursday">Thu</string>
+    <string name="Friday">Fri</string>
+    <string name="Monday_full">Monday</string>
+    <string name="Tuesday_full">Tuesday</string>
+    <string name="Wednesday_full">Wednesday</string>
+    <string name="Thursday_full">Thursday</string>
+    <string name="Friday_full">Friday</string>
+    <string name="Lab">Lab</string>
+    <string name="Dis">Discussion</string>
+    <string name="Course">Course</string>
+    <string name="Meeting">Meeting</string>
+    <string name="course_select_start">Select start time:</string>
+    <string name="course_add_back">Back to courses list </string>
+    <string name="course_noType">You must select a type! </string>
+    <string name="course_noStart">You must pick a start time!</string>
+</resources>

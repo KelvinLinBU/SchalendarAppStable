@@ -10,4 +10,6 @@
     <string name="menu_course">Course</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="course">Course</string>
 </resources>

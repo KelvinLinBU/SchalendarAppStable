@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.databinding.FragmentCourseBinding
-import com.example.myapplication.databinding.FragmentHomeBinding
 private const val TAG = "CourseFragment"
 class CourseFragment : Fragment() {
 /*
