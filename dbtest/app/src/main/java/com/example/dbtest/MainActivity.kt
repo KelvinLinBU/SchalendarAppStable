@@ -71,7 +71,6 @@ class MainActivity : ComponentActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var buildingNum = taskViewModel.allBuildings()
         setContent {
             BasicsCodelabTheme{
                 MyScreen(this,taskViewModel)
@@ -81,7 +80,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
+/*
 fun initBuilding(taskViewModel: TaskViewModel){
     var b0 = Building("AAS","138 Mountfort Street")
     var b1 = Building("AGG","925 Commonwealth Avenue")
@@ -162,8 +161,8 @@ fun initBuilding(taskViewModel: TaskViewModel){
     var b76 = Building("","")
     var b77 = Building("","")
     var b78 = Building("","")
-
 }
+*/
 // bar set
 @Composable
 private fun BottomNavigation(selectedPage: String, onNavigation: (String) -> Unit) {
