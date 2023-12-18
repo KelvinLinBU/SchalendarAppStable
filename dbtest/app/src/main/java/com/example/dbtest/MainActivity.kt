@@ -1,6 +1,6 @@
 package com.example.dbtest
 
-import ProfilePage
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -58,6 +58,7 @@ import com.example.dbtest.course.AddCourse
 import com.example.dbtest.course.CourseApp
 import com.example.dbtest.course.CoursePage
 import com.example.dbtest.database.Building
+import com.example.dbtest.database.ProfilePage
 import com.example.dbtest.database.Task
 import com.example.dbtest.database.TaskRepository
 import com.example.dbtest.task.Addtask
