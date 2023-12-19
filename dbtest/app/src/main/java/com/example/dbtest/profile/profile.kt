@@ -1,6 +1,8 @@
 package com.example.dbtest.database
 import android.app.Activity
+import java.util.Locale
 import android.content.Context
+import android.content.res.Configuration
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
@@ -21,6 +23,7 @@ import com.example.dbtest.TaskViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun GoogleSignInButton(googleSignInClient: GoogleSignInClient) {
@@ -59,7 +62,7 @@ fun DropdownMenuSampleProfile(options:List<String>, selectedOption: MutableState
         }
         DropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false } // 点击外部时关闭菜单
+            onDismissRequest = { expanded = false }
         ) {
             options.forEach { option ->
                 DropdownMenuItem(
@@ -83,11 +86,8 @@ fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
 
     var selectedType by remember { mutableStateOf("") }
     val langOptions = listOf(
-        stringResource(id = R.string.Lecture),
-        stringResource(id = R.string.Independent),
-        stringResource(id = R.string.Lab),
-        stringResource(id = R.string.Dis),
-        stringResource(id = R.string.Meeting)
+        stringResource(id = R.string.French),
+        stringResource(id = R.string.Chinese)
     )
 
     Column(
@@ -120,9 +120,32 @@ fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
         )
 
         Spacer(modifier = Modifier.height(8.dp))
+        var currentLocale by remember { mutableStateOf(Locale.getDefault()) }
+        var locale: Locale = Locale.ENGLISH
+        if (selectedType == "Chinese") {
+            locale = Locale("zh")
+        }
+        else if(selectedType == "French"){
+            locale = Locale("fr")
+        }
+        else if(selectedType == "English"){
+            locale = Locale("en")
+        }
 
-        // Dropdown Menu
-        DropdownMenuSampleProfile(langOptions, mutableStateOf(selectedType))
+        //val onLocaleSelected: (Locale) -> Unit = { selectedType ->
+          //  if (locale != currentLocale) {
+            //    val context = LocalContext.current
+              //  updateLocale(context, selectedType)
+                //currentLocale = locale
+            //}
+        //}
+
+        //DropdownMenuSampleProfile(
+          //  langOptions,
+           // mutableStateOf(""),
+            //onLocaleSelected
+        //)
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -130,7 +153,13 @@ fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
         GoogleSignInButton(googleSignInClient)
     }
 }
-
+fun updateLocale(context: Context, locale: Locale) {
+    Locale.setDefault(locale)
+    val config = Configuration(context.resources.configuration)
+    config.setLocale(locale)
+    context.createConfigurationContext(config)
+    context.resources.updateConfiguration(config, context.resources.displayMetrics)
+}
 @Composable
 fun ProfilePage(context: Context, taskViewModel: TaskViewModel, modifier: Modifier) {
     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

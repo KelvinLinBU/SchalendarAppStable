@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dbtest</string>
+    <string name="app_name">Schalendar</string>
     <string name="show_less">Show less</string>
     <string name="show_more">Show more</string>
     <string name="bottom_navigation_home">Courses</string>
@@ -22,8 +22,8 @@
     <string name="task_del">Finished </string>
     // Course screen
     <string name="course_outschool">Out Campus </string>
-    <string name="course_del"> Delete </string>
-    <string name="course_dir"> Get Direction </string>
+    <string name="course_del">"Delete "</string>
+    <string name="course_dir">"Get Direction "</string>
     <string name="course_noCourse">No Courses!</string>
     <string name="Monday">Mon</string>
     <string name="Tuesday">Tue</string>
@@ -44,4 +44,6 @@
     <string name="course_add_back">Back to courses list </string>
     <string name="course_noType">You must select a type! </string>
     <string name="course_noStart">You must pick a start time!</string>
+    <string name="French">French</string>
+    <string name="Chinese">Chinese</string>
 </resources>
