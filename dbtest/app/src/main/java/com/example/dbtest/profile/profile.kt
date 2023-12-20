@@ -130,14 +130,16 @@ fun ReplyTheme(
 fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
     var isDarkTheme by remember { mutableStateOf(false) }
 
-    ReplyTheme(darkTheme = isDarkTheme) {
 
 
 
-        val userName = "John Doe" // Replace with the user's name
-        val userEmail = "johndoe@example.com" // Replace with user's email
-        val userBio =
-            "This is my bio. I love coding and learning new things!" // Replace with user's bio
+
+        val userName = "Hello User!" // Replace with the user's name
+        val userEmail = "Welcome to the Profile Page" // Replace with user's email
+        val userBio = "The Schalendar app is used for task managment. Using our intuitive and easy to use UI/UX you can add recurring BU courses, and " +
+                "one-time tasks. In order to use the location functionality in the app, you simply just need to view the details of the class, and you will be directed to the Google API. " +
+                "Also, If you click the weather icon on the Courses page, you will also receive personalized weather recommendations based on your chosen location. We currently have translations for French and Chinese users with more to come in the future!"
+                     // Replace with user's bio
 
         var selectedType by remember { mutableStateOf("") }
 
@@ -173,7 +175,7 @@ fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
             Text(
                 text = userBio,
                 color = Color.Black,
-                maxLines = 3,
+                maxLines = 30,
                 overflow = TextOverflow.Ellipsis
             )
 
@@ -202,15 +204,7 @@ fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
             //onLocaleSelected
             //)
 
-            Button(
-                onClick = {
-                    isDarkTheme = !isDarkTheme
 
-                },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(if (isDarkTheme) "Switch to Light Theme" else "Switch to Dark Theme")
-            }
 
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -218,7 +212,7 @@ fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
             // Google Sign-In Button
             GoogleSignInButton(googleSignInClient)
         }
-    }
+
 
     fun updateLocale(context: Context, locale: Locale) {
         Locale.setDefault(locale)
