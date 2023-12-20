@@ -45,4 +45,8 @@
     <string name="course_noStart">您必须选择开始时间</string>
     <string name="French">法语</string>
     <string name="Chinese">中文</string>
+    <string name="hellouser">您好用户</string>
+    <string name="hellouser2">欢迎来到个人资料页面</string>
+    <string name="profileblurb">Schalendar 应用程序用于任务管理。使用我们直观且易于使用的 UI/UX，您可以添加重复的 BU 课程和一次性任务。为了在应用程序中使用位置功能，您只需查看类的详细信息，然后您将被定向到 Google API。     此外，如果您单击课程页面上的天气图标，您还将收到基于您选择的位置的个性化天气建议。我们目前为法语和中文用户提供了翻译，未来还会有更多翻译</string>
+    <string name="googlesignin">用谷歌登录！</string>
 </resources>

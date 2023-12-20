@@ -37,10 +37,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
-
-
-
-
+import com.example.dbtest.LocaleHelper
 
 
 @Composable
@@ -67,7 +64,7 @@ fun GoogleSignInButton(googleSignInClient: GoogleSignInClient) {
         },
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text("Sign in with Google")
+        Text(stringResource(id = R.string.googlesignin))
     }
 }
 
@@ -134,12 +131,9 @@ fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
 
 
 
-        val userName = "Hello User!" // Replace with the user's name
-        val userEmail = "Welcome to the Profile Page" // Replace with user's email
-        val userBio = "The Schalendar app is used for task managment. Using our intuitive and easy to use UI/UX you can add recurring BU courses, and " +
-                "one-time tasks. In order to use the location functionality in the app, you simply just need to view the details of the class, and you will be directed to the Google API. " +
-                "Also, If you click the weather icon on the Courses page, you will also receive personalized weather recommendations based on your chosen location. We currently have translations for French and Chinese users with more to come in the future!"
-                     // Replace with user's bio
+        val userName = stringResource(id = R.string.hellouser)
+        val userEmail = stringResource(id = R.string.hellouser2)
+        val userBio = stringResource(id = R.string.profileblurb)
 
         var selectedType by remember { mutableStateOf("") }
 

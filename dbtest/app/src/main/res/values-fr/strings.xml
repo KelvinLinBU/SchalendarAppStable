@@ -45,4 +45,8 @@
     <string name="course_noStart">Vous devez choisir une heure de début!</string>
     <string name="French">Français</string>
     <string name="Chinese">Chinois</string>
+    <string name="hellouser">Bonjour utilisateur</string>
+    <string name="hellouser2">Bienvenue sur la page de profil</string>
+    <string name="profileblurb">L\'application Schalendar est utilisée pour la gestion des tâches. Grâce à notre UI/UX intuitive et facile à utiliser, vous pouvez ajouter des cours BU récurrents et des tâches ponctuelles. Pour utiliser la fonctionnalité de localisation de l\'application, il vous suffit de visualiser les détails du cours et vous serez dirigé vers l\'API Google.     De plus, si vous cliquez sur l\'icône météo sur la page Cours, vous recevrez également des recommandations météorologiques personnalisées en fonction de l\'emplacement choisi. Nous avons actuellement des traductions pour les utilisateurs français et chinois et d\'autres seront à venir dans le futur !</string>
+    <string name="googlesignin">connectez-vous avec Google !</string>
 </resources>

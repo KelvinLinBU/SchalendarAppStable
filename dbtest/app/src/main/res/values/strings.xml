@@ -46,4 +46,9 @@
     <string name="course_noStart">You must pick a start time!</string>
     <string name="French">French</string>
     <string name="Chinese">Chinese</string>
+    <string name="hellouser">Hello User</string>
+    <string name="hellouser2">Welcome to the Profile Page</string>
+    <string name="profileblurb">The Schalendar app is used for task managment. Using our intuitive and easy to use UI/UX you can add recurring BU courses, and one-time tasks. In order to use the location functionality in the app, you simply just need to view the details of the class, and you will be directed to the Google API.
+    Also, If you click the weather icon on the Courses page, you will also receive personalized weather recommendations based on your chosen location. We currently have translations for French and Chinese users with more to come in the future!</string>
+    <string name="googlesignin">Sign in with Google!</string>
 </resources>
