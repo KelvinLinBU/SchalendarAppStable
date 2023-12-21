@@ -42,7 +42,19 @@ import androidx.compose.ui.unit.dp
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.common.api.GoogleApiClient
 
-
+fun signOut(googleSignInClient: GoogleSignInClient, context: Context) {
+    googleSignInClient.signOut()
+        .addOnCompleteListener {
+            // Sign-out was successful
+            Toast.makeText(context, "Signed out successfully", Toast.LENGTH_SHORT).show()
+            // Perform additional actions after sign-out if needed
+        }
+        .addOnFailureListener { e ->
+            // Sign-out failed
+            Toast.makeText(context, "Sign-out failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            // Handle failure scenario if needed
+        }
+}
 @Composable
 fun GoogleSignInButton(googleSignInClient: GoogleSignInClient) {
     val context = LocalContext.current
@@ -79,7 +91,19 @@ fun GoogleSignInButton(googleSignInClient: GoogleSignInClient) {
         Text(stringResource(id = R.string.googlesignin))
     }
 }
+@Composable
+fun SignOutButton(googleSignInClient: GoogleSignInClient) {
+    val context = LocalContext.current
 
+    Button(
+        onClick = {
+            signOut(googleSignInClient, context)
+        },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(text = "Sign Out")
+    }
+}
 @Composable
 fun DropdownMenuSampleProfile(options:List<String>, selectedOption: MutableState<String>) {
     Box(modifier = Modifier){
@@ -189,6 +213,7 @@ fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
 
             // Google Sign-In Button
             GoogleSignInButton(googleSignInClient)
+            SignOutButton(googleSignInClient = googleSignInClient)
         }
 
 
