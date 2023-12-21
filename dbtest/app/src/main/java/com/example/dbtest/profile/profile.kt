@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import android.content.Context
 import android.content.res.Configuration
 import android.provider.CalendarContract
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
@@ -38,27 +40,38 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
 import com.example.dbtest.LocaleHelper
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.common.api.GoogleApiClient
 
 
 @Composable
 fun GoogleSignInButton(googleSignInClient: GoogleSignInClient) {
     val context = LocalContext.current
     val activity = LocalContext.current as? Activity
-
     val signInLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         // Handle the result of the sign-in process here
         if (result.resultCode == Activity.RESULT_OK) {
-            // Signed in successfully, handle the result
-            // For example, get the user's information or perform actions after sign-in
+
             val account = GoogleSignIn.getLastSignedInAccount(context)
+            val userName = account?.displayName ?: "Unknown"
+            Toast.makeText(context, "Welcome $userName", Toast.LENGTH_LONG). show()
             // Handle the account details or navigate to a new screen
         } else {
-            // Handle unsuccessful sign-in or canceled sign-in
+
+
+            Toast.makeText(context, "Sign-in failed", Toast.LENGTH_SHORT).show()
         }
     }
 
     Button(
         onClick = {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                // Add other scopes as needed
+                .build()
+            val mGoogleApiClient = GoogleApiClient.Builder(context)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build()
             val signInIntent = googleSignInClient.signInIntent
             signInLauncher.launch(signInIntent)
         },
@@ -92,40 +105,12 @@ fun DropdownMenuSampleProfile(options:List<String>, selectedOption: MutableState
     }
 }
 
-@Composable
-fun ReplyTheme(
 
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
-    val lightColors = lightColorScheme(
-        primary = Color.Blue,
-        background = Color.White,
-        onBackground = Color.Black
-        // Define other colors as needed for your light theme
-    )
 
-    val darkColors = darkColorScheme(
-        primary = Color.Green,
-        background = Color.White,
-        onBackground = Color.Yellow
-        // Define other colors as needed for your dark theme
-    )
 
-    val colorScheme = if (!darkTheme) {
-        lightColors
-    } else {
-        darkColors
-    }
-
-    MaterialTheme(
-        colorScheme = colorScheme,
-        content = content
-    )
-}
 @Composable
 fun ProfileScreen(googleSignInClient: GoogleSignInClient) {
-    var isDarkTheme by remember { mutableStateOf(false) }
+
 
 
 
